@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+
+<body>
+{% for i in item %}
+    <h1>ItemID: {{ i.item_id }}</h1>
+    <p>Name: {{ i.name }}</p>
+    <p>Quantity: {{ i.quantity }}</p>
+    <p>Price: {{ i.price }}</p>
+    <button id={{i.item_id}} onclick="sendtocart(this)">ADD</button>
+{% endfor %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    function sendtocart(button){
+        var itemid= button.id;
+        $.ajax({type:"POST",
+    url:"/core/add_to_cart/" + itemid + "/"}).done((res)=>{console.log(res)}).fail((res)=>{console.log(res)})
+    }
+</script>
+</body>
+</html>

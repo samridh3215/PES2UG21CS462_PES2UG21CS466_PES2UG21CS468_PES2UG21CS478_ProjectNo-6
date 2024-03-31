@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of all items</title>
+</head>
+<body>
+    {% if latest_item_list %}
+    <ul>
+    {% for item in latest_item_list %}
+    <a href="/core/{{item.item_id}}"> <li>{{ item.name }}</li></a>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No items are available.</p>
+{% endif %}
+</body>
+</html>
