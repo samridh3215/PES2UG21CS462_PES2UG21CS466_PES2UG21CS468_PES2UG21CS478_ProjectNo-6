@@ -3,8 +3,8 @@ FROM python:3.10
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY . AuthenticationMicroservice
-WORKDIR /AuthenticationMicroservice
+COPY . PayementMicroservice
+WORKDIR /PayementMicroservice
 
 EXPOSE 8000
 ENTRYPOINT ["python3", "manage.py"]
