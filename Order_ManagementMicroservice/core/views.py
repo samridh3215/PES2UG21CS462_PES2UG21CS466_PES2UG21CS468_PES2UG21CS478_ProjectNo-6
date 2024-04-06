@@ -7,6 +7,7 @@ from .serializers import CartItemSerializer
 from .models import CartItem
 
 url_for_items = 'http://localhost:8000/api/items/'
+url_for_payment = 'http://localhost:8080/api/payments/'
 
 # Create your views here.
 def index(request):
@@ -43,5 +44,13 @@ def remove_from_cart(request, cart_item_id):
     item = requests.get(url_for_items+"{}/".format(cart_item.item_id)).json()
     response = requests.patch(url_for_items+"{}/".format(cart_item.item_id), data={'quantity': item['quantity'] + cart_item.quantity})
     cart_item.delete()
+    return redirect('view_cart')
+
+def checkout(request):
+    cart_items = [item for item in CartItem.objects.all()]
+    total_price = sum(item.price * item.quantity for item in cart_items)
+    response = requests.post(url_for_payment, data={'payment_amount': total_price})
+    for item in cart_items:
+        item.delete()
     return redirect('view_cart')
 
