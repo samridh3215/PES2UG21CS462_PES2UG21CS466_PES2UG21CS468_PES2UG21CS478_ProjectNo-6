@@ -11,3 +11,9 @@
 
 Refer Django Docs to get started
 
+## Steps to create docker images and run docker containers
+- Go inside the microservice dir where the dockerfile for that MS is present
+- To create image -> docker build -t <TAG_FOR_IMAGE> .
+- To run a container -> docker run -it -p <PORT>:<PORT> <TAG_FOR_IMAGE>
+
+
