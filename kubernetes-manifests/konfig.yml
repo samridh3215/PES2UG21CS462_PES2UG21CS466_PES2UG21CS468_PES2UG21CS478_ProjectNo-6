@@ -1,0 +1,128 @@
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itemservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: itemservice
+  template:
+    metadata:
+      labels:
+        app: itemservice
+    spec:
+      containers:
+        - name: itemservice-container
+          image: sanskarapkhatri/item-microservice:0.0.1
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /app/db
+      volumes:
+        - name: sqlite-volume
+          emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: itemservice
+spec:
+  selector:
+    app: itemservice
+  ports:
+    - port: 80
+      targetPort: 8000
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paymentservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paymentservice
+  template:
+    metadata:
+      labels:
+        app: paymentservice
+    spec:
+      containers:
+        - name: paymentservice-container
+          image: sanskarapkhatri/payment-microservice:0.0.1
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /app/db
+      volumes:
+        - name: sqlite-volume
+          emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: paymentservice
+spec:
+  selector:
+    app: paymentservice
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orderservice
+  template:
+    metadata:
+      labels:
+        app: orderservice
+    spec:
+      containers:
+        - name: orderservice-container
+          image: sanskarapkhatri/order-service:0.0.1
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /app/db
+      volumes:
+        - name: sqlite-volume
+          emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderservice
+spec:
+  selector:
+    app: orderservice
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP
+
+---

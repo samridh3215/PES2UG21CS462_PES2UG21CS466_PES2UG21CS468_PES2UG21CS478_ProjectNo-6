@@ -5,9 +5,16 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .serializers import CartItemSerializer
 from .models import CartItem
+import os
 
-url_for_items = 'http://localhost:8000/api/items/'
-url_for_payment = 'http://localhost:8080/api/payments/'
+url_for_items = "http://" + os.environ.get('ITEMSERVICE_SERVICE_HOST') + os.environ.get('ITEMSERVICE_SERVICE_PORT') + "/api/items/"
+url_for_payment = "http://" + os.environ.get('ORDERSERVICE_SERVICE_HOST') + os.environ.get('ORDERSERVICE_SERVICE_PORT') + '/api/payments/'
+
+# url_for_items = 'http://localhost:8000/api/items/'
+# url_for_payment = 'http://localhost:8080/api/payments/'
+
+# url_for_items = 'http://item-microservice:8000/api/items/'
+# url_for_payment = 'http://payment-microservice:8080/api/payments/'
 
 # Create your views here.
 def index(request):

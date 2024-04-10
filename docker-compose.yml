@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  item-microservice:
+    image: item-ms:latest
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    restart: always
+    networks:
+      - ecomm-network
+
+  payment-microservice:
+    image: payment-ms:latest
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    restart: always
+    networks:
+      - ecomm-network
+
+  order-microservice:
+    image: order-ms:latest
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    restart: always
+    depends_on:
+      - item-microservice
+      - payment-microservice
+    networks:
+      - ecomm-network
+  
+networks:
+  ecomm-network:

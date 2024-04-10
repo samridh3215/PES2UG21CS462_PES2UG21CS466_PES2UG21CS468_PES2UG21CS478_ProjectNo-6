@@ -6,8 +6,8 @@ RUN pip install -r requirements.txt
 COPY . OrderMicroservice
 WORKDIR /OrderMicroservice
 
-EXPOSE 8000
+# EXPOSE 3000
 ENTRYPOINT ["python3", "manage.py"]
-CMD ["runserver", "0.0.0.0:8000"]
+CMD ["runserver", "0.0.0.0:3000"]
 
 
