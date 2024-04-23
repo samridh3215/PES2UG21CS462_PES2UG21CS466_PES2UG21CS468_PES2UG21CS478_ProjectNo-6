@@ -7,7 +7,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
+if st.button("< Order"):
+    st.switch_page("pages/order.py")
 st.title("Cart")
 ORDER_PORT = get_service_port("order")
 CART_URL = f"http://{os.environ.get('MINIKUBE_IP')}:{ORDER_PORT}/api/view_cart/"

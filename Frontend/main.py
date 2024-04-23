@@ -3,7 +3,7 @@ import subprocess
 import os
 import time
 import requests
-from utils import get_service_port
+from Frontend.utils import get_service_port
 # Define functions for sign-up and sign-in
 def sign_up():
     st.title("Sign Up")

@@ -23,4 +23,4 @@ def parse_cart_json_response(jsonStr):
         i['remove_cart'] = f"http://{os.environ.get('MINIKUBE_IP')}:{get_service_port('order')}/api/remove_from_cart/{i['item_id']}"
     return dic
 
-# parse_cart_json_response('{"cart_items": [{"name": "Oneplus Nord Buds 2", "item_id": 1, "quantity": 2, "price": "2450.00"}, {"name": "IPhone", "item_id": 3, "quantity": 3, "price": "59999.00"}], "total_price": "184897.00"}')
+# parse_cart_json_response('{"cart_items": [{"name": "Oneplus Nord Buds 2", "item_id": 1, "quantity": 2, "price": "2450.00"}, {"name": "IPhone", "item_id": 3, "quantity": 3, "price": "59999.00"}], "total_price": "184897.00"}')  
